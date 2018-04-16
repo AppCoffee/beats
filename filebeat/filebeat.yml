@@ -1,21 +1,14 @@
-
-setup.kibana:
-  host: "localhost:5601"
-
-output.elasticsearch:
-  # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
-
-output.logstash:
-  hosts: ["localhost:5044"]
-
-filebeat.inputs:
-  - type: log
-  # Change to true to enable this input configuration.
-  enabled: false
-
-  # Paths that should be crawled and fetched. Glob based paths.
-  paths:
-    - /var/log/*.log
-    - "/home/test/workspace/appium_test/result/logcat/20180412/*.log"
-    - /home/test/workspace/appium_test/result/logcat/*/*.log
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /home/test/workspace/appium_test/result/logcat/20180412/*.log
+      input_type: log
+      document_type: logcat-example
+  registry_file: /var/lib/filebeat/registry
+output:
+  logstash:
+    hosts: ["localhost:5044"]
+    index: filebeat
+    tls:
+      certificate_authorities: ["/etc/pki/tls/certs/logstash-beats.crt"]
