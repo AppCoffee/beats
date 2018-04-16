@@ -8,10 +8,5 @@ filebeat:
   prospectors:
     -
       paths:
-        - /var/log/syslog
-        - /var/log/auth.log
-      document_type: syslog
-    -
-      paths:
         - "/home/test/workspace/appium_test/result/logcat/20180412/*.log"
       document_type: logcat
