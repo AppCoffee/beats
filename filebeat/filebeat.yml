@@ -1,8 +1,7 @@
 output:
   logstash:
     enabled: true
-    hosts:
-      - elk:5044
+    hosts: ["127.0.0.1:5044"]
     timeout: 15
 
 filebeat:
